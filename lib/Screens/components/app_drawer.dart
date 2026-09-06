@@ -91,7 +91,7 @@ class AppDrawer extends StatelessWidget {
                     content: Text(
                       "أنا مطور فلاتر وأقوم بتصميم تطبيقات الهواتف \n"
                       "رابط صفحتي على الغيب هب \n"
-                      "https://github.com/huzaifa-khashan",
+                      "https://github.com/huzaifakhashan",
                     ),
                     actions: [
                       TextButton(
