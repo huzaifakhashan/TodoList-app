@@ -42,4 +42,4 @@ flutter run
 
 Download the latest version of the application:
 
-[⬇️ Download APK](sha256:be33cc1207ef2ab265a947f5d5797a9e29f374ce4eb18cd5163fb74a8e01f2fa)
+[⬇️ Download APK](https://github.com/huzaifakhashan/TodoList-app/releases/download/v1.0.0/default.apk)
