@@ -29,6 +29,13 @@ A simple and easy-to-use Todo List application built with Flutter.
 </p>
 
 
+
+## 📥 Download
+
+Download the latest version of the application:
+
+[⬇️ Download APK](https://github.com/huzaifakhashan/TodoList-app/releases/tag/v1.0.0/default.apk)
+
 ## 🚀 Getting Started
 
 To run this project:
@@ -37,9 +44,3 @@ To run this project:
 flutter pub get
 flutter run
 
-
-## 📥 Download
-
-Download the latest version of the application:
-
-[⬇️ Download APK](https://github.com/huzaifakhashan/TodoList-app/releases/tag/v1.0.0/default.apk)
