@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:to_do_list/Screens/components/task.form.dart';
 import 'package:to_do_list/providers/task_providers.dart';
 
 class TaskList extends StatelessWidget {
@@ -7,36 +8,73 @@ class TaskList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TaskProvider = context.watch<TaskProviders>();
+    final provider = context.watch<TaskProviders>();
+    final tasks = provider.tasks;
+
+    if (tasks.isEmpty) {
+      return const Expanded(
+        child: Center(child: Text("لا توجد مهام")),
+      );
+    }
+
     return Expanded(
-      flex: 5,
       child: ListView.builder(
-        itemCount: TaskProvider.tasks.length,
+        itemCount: tasks.length,
         itemBuilder: (context, index) {
-          return Container(
-            child: Dismissible(
-              direction: DismissDirection.endToStart,
-              onDismissed: (direction) {
-                TaskProvider.removeTask(TaskProvider.tasks[index]);
-              },
-              key: Key(TaskProvider.tasks[index].id),
-              background: Container(
-                padding: EdgeInsets.only(right: 25),
-                alignment: Alignment.centerRight,
-                color: Colors.red,
-                child: Icon(Icons.delete, size: 40),
-              ),
-              child: ListTile(
-                title: Text(TaskProvider.tasks[index].title),
-                trailing: Image(
-                  image: TaskProvider.tasks[index].completed
-                      ? AssetImage("assets/icons/emoji4.webp")
-                      : AssetImage("assets/icons/emoji3.webp"),
+          final task = tasks[index];
+          return Dismissible(
+            direction: DismissDirection.endToStart,
+            onDismissed: (direction) {
+              provider.removeTask(task);
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: const Text("تم نقل المهمة إلى سلة المحذوفات"),
+                    action: SnackBarAction(
+                      label: "تراجع",
+                      onPressed: () => provider.restoreTask(task),
+                    ),
+                  ),
+                );
+            },
+            key: Key(task.id),
+            background: Container(
+              padding: const EdgeInsets.only(right: 25),
+              alignment: Alignment.centerRight,
+              color: Colors.red,
+              child: const Icon(Icons.delete, size: 40),
+            ),
+            child: ListTile(
+              title: Text(
+                task.title,
+                style: TextStyle(
+                  decoration:
+                      task.completed ? TextDecoration.lineThrough : null,
                 ),
-                onTap: () {
-                  TaskProvider.makeTaskCompleated(index);
-                },
               ),
+              subtitle:
+                  task.description.isEmpty ? null : Text(task.description),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.edit),
+                    onPressed: () => showDialog(
+                      context: context,
+                      builder: (_) => TaskForm(task: task),
+                    ),
+                  ),
+                  Image(
+                    image: AssetImage(
+                      task.completed
+                          ? "assets/icons/emoji4.webp"
+                          : "assets/icons/emoji3.webp",
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () => provider.toggleTask(task),
             ),
           );
         },

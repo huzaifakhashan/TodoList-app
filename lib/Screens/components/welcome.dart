@@ -14,7 +14,7 @@ class Welcome extends StatelessWidget {
             children: [
               Text(
                 "أهلاً بك $name",
-                style: TextStyle(fontSize: 25, color: Colors.black),
+                style: TextStyle(fontSize: 25),
               ),
               Padding(
                 padding: EdgeInsets.only(left: 20),

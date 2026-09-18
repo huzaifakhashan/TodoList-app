@@ -8,14 +8,12 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Column(
+    return const Column(
       children: [
-        Welcome(name:"ياصاحب"),
+        Welcome(name: "ياصاحب"),
         AddTaskButton(),
         TaskList(),
-      ]),
+      ],
     );
   }
 }

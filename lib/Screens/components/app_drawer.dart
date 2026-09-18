@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:to_do_list/Screens/trash_page.dart';
 import 'package:to_do_list/providers/task_providers.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -22,7 +23,6 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
 
-          // 🌓 Dark Mode
           SwitchListTile(
             title: Text("الوضع الليلي"),
             value: provider.isDarkMode,
@@ -34,7 +34,22 @@ class AppDrawer extends StatelessWidget {
 
           Divider(),
 
-          // 🧹 حذف كل المهام
+          ListTile(
+            leading: Icon(Icons.delete_outline),
+            title: Text("سلة المحذوفات"),
+            trailing:
+                provider.trash.isEmpty ? null : Text("${provider.trash.length}"),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const TrashPage()),
+              );
+            },
+          ),
+
+          Divider(),
+
           ListTile(
             leading: Icon(Icons.delete_forever, color: Colors.red),
             title: Text("حذف جميع المهام"),
@@ -43,7 +58,7 @@ class AppDrawer extends StatelessWidget {
                 context: context,
                 builder: (_) => AlertDialog(
                   title: Text("تأكيد"),
-                  content: Text("هل تريد حذف كل المهام؟"),
+                  content: Text("سيتم نقل كل المهام إلى سلة المحذوفات. هل تريد المتابعة؟"),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),
@@ -64,7 +79,6 @@ class AppDrawer extends StatelessWidget {
 
           Divider(),
 
-          // ℹ️ About
           ListTile(
             leading: Icon(Icons.info),
             title: Text("حول التطبيق"),
@@ -90,7 +104,7 @@ class AppDrawer extends StatelessWidget {
                     title: Text("من نحن"),
                     content: Text(
                       "أنا مطور فلاتر وأقوم بتصميم تطبيقات الهواتف \n"
-                      "رابط صفحتي على الغيب هب \n"
+                      "رابط صفحتي على غيت هاب \n"
                       "https://github.com/huzaifakhashan",
                     ),
                     actions: [

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_list/Home_page.dart';
+import 'package:to_do_list/home_page.dart';
 import 'package:to_do_list/providers/task_providers.dart';
 
 void main() async {
@@ -12,26 +12,25 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (_) => provider,
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
+
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskProviders>(
       builder: (context, provider, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: HomePage(),
-          title: "Todo list",
-
+          home: const HomePage(),
+          title: "قائمتي",
           theme: ThemeData.light(),
           darkTheme: ThemeData.dark(),
-
-          themeMode: provider.isDarkMode
-              ? ThemeMode.dark
-              : ThemeMode.light,
+          themeMode: provider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
         );
       },
     );

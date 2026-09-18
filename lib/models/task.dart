@@ -1,11 +1,13 @@
 class Task {
   final String id;
   String title;
+  String description;
   bool completed;
 
   Task({
     required this.id,
     required this.title,
+    this.description = '',
     this.completed = false,
   });
 
@@ -13,6 +15,7 @@ class Task {
     return {
       'id': id,
       'title': title,
+      'description': description,
       'completed': completed,
     };
   }
@@ -21,7 +24,8 @@ class Task {
     return Task(
       id: json['id'],
       title: json['title'],
-      completed: json['completed'],
+      description: json['description'] ?? '',
+      completed: json['completed'] ?? false,
     );
   }
 }
